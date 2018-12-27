@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>  <meta charset="utf-8"></head>
+<body>
+	<script>
+		var m = [
+		{
+			text: 'Животные',
+			childs: [
+			{
+				text: 'Млекопитающие',
+				childs: [
+				'Грызуны',
+				'Рукокрылые',
+				'Китообразные',
+				'Ластоногие'
+				]
+			},
+			{
+				text: 'Рыбы',
+				childs: [
+				'Круглоротые',
+				'Хрящевые рыбы',
+				'Костные рыбы'
+				]
+			}
+			]
+		},
+		{
+			text: 'Растения',
+			childs: [
+			{
+				text: 'Высшие растения',
+				childs: [
+				'Моховидные',
+				'Плауновидные',
+				'Хвощевидные',
+				'Папоротниковидные',
+				'Голосеменные',
+				'Покрытосеменные'
+				]
+			},
+			{
+				text: 'Низшие растения',
+				childs: [
+				'Лишайники',
+				'Зеленые водоросли',
+				'Бурые водоросли',
+				'Диатомовые водоросли',
+				'Красные водоросли'
+				]
+			}
+			]
+		},
+		{
+			text: 'Грибы',
+			childs: [
+			{
+				text: 'Одноклеточные',
+				childs: [
+				'Дрожжи'
+				]
+			},
+			{
+				text: 'Многоклеточные',
+				childs: [
+				{
+					text: 'Плесневые',
+					childs: [
+					'Мукор',
+					'Пеницилл'
+					]
+				},
+				{					
+					text: 'Шляпочные',
+					childs: [
+					'Трубчатые',
+					'Пластинчатые'
+					]
+				}
+				]
+			}
+			]
+		},
+		{
+			text: 'Вирусы',
+			childs: [
+			{
+				text: 'ДНК-вирусы',
+				childs: [
+				'Без оболочки',
+				'С оболочкой'
+				]
+			},
+			{
+				text: 'РНК-вирусы',
+				childs: [
+				'Без оболочки',
+				'С оболочкой'
+				]
+			}
+			]
+		},
+		{
+			text: 'Прокариоты',
+			childs: [
+			{
+				text: 'Настоящие бактерии',
+			},
+			{
+				text: 'Архебактерии',
+			},
+			{
+				text: 'Оксифотобактерии',
+			}
+			]
+		}
+		]
+		function generateList(childs) {   /* функция генератора рекурсивного списка*/
+
+			let ul = document.createElement('ul')
+			for (let child of childs) {
+				let li = document.createElement('li')
+				if (child.text !== undefined) 
+					li.append(child.text)
+				if (typeof child !== 'object')
+					li.append(child)
+				else if (child.childs !== undefined) 
+					li.append(generateList(child.childs))
+				ul.append(li)
+			}
+			return ul
+		}
+		document.body.append(generateList(m))
+		function run(element) {
+			if (element.childNodes === undefined) return
+				for (let node of element.childNodes) {
+					console.log(node.nodeName, node.nodeType, node.nodeValue)
+					run(node)
+				}
+			}
+			run(document)
+	</script>
+</body>
+</html>
